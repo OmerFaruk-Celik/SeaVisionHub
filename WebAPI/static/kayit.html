@@ -1,0 +1,108 @@
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+		body {
+			font-family: Arial, sans-serif;
+			background-image: url('images/arkaPlanGiris.jpg');
+			background-size: 380px 340px;
+			background-repeat: no-repeat;
+			background-position: center;
+			height: 100vh;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 20px;
+		}
+
+        .register-container {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #006400;
+            text-align: center;
+        }
+
+        .form-control {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #006400;
+        }
+
+        .btn {
+            margin-top: 20px;
+            border-radius: 10px;
+            background-color: #006400;
+            color: white;
+        }
+
+        .btn:hover {
+            background-color: #006400;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center">Kayıt Ol</h2>
+                <form id="register-form">  
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="Kullanıcı Adı" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="E-posta Adresi" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Şifre" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.querySelector('#register-form');  // Form elementini ID ile seçin
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();  // Varsayılan gönderim davranışını engelle
+
+            const formData = new FormData(form);
+            const jsonData = JSON.stringify(Object.fromEntries(formData));
+
+            fetch('/register', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: jsonData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = '/login.html';
+                // Başarılı kayıt işlemi sonrası yapılacaklar (örneğin, kullanıcıyı yönlendirme)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Hata işleme
+            });
+        });
+    </script>
+</body>
+</html>
+
+    

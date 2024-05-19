@@ -1,0 +1,49 @@
+pip install Flask
+pip install Flask-SQLAlchemy
+sudo apt  install httpie 
+pip install Flask-HTTPAuth
+pip install PyJWT
+
+
+
+http POST http://127.0.0.1:5000/users name="John" age=30
+
+Bu istek, /users endpoint'ine POST isteği göndererek yeni bir kullanıcı oluşturur. Eğer /users endpoint'inde kullanıcıyı güncelleme yapmak istiyorsanız PUT isteği kullanabilirsiniz. Örneğin:
+
+bash
+
+http PUT http://127.0.0.1:5000/users/1 name="Jane" age=25
+
+
+
+
+Örneğin, bir kullanıcının profil bilgilerini güncellemek için PATCH yöntemini kullanabiliriz. Diyelim ki kullanıcının adını güncellemek istiyoruz. Bu durumda, sadece güncellenen alanı içeren veriyi göndermemiz yeterli olacaktır. Örneğin, bir JSON verisi şeklinde gönderilebilir:
+
+json
+
+{
+    "name": "Yeni Ad"
+}
+
+Bu veriyi kullanarak PATCH isteği göndermek, sadece ad alanını güncelleyecektir. Örneğin, HTTPie aracını kullanarak şu şekilde bir istek gönderebiliriz:
+
+bash
+
+http PATCH http://127.0.0.1:5000/users/1 name="Yeni Ad"
+
+Bu istek, ID'si 1 olan kullanıcının adını "Yeni Ad" olarak güncelleyecektir. Bu sayede, sadece güncellenen alanı içeren veriyi göndererek verimli bir güncelleme işlemi gerçekleştirmiş oluruz.
+
+
+
+
+
+http GET http://127.0.0.1:5000/users
+
+Bu istek, tüm kullanıcıları içeren bir JSON yanıtını alacaktır.
+
+
+
+
+##DOSYA ALMA ve KAYDETME
+
+http --download GET http://127.0.0.1:5000/openfile -o /yol/ile/dosya.jpg
